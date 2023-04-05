@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    environment{
+        mvn_home = tool name :'maven' type : 'maven'
+    }
+
+    stages{
+        stage('git checkout'){
+            steps{
+                git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/NARRU1996/spapp.git/'
+            }
+        }
+        stage('mvn build'){
+            steps{
+                sh "mvn clean install"
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+}

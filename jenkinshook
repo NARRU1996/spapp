@@ -1,20 +1,21 @@
-pipeline{
+pipeline {
     agent any
-    environment{}
 
-    stages{
-        stage('git checkout'){
-            steps{
-                
-
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/NARRU1996/spapp.git/'
             }
         }
-
+        stage('build') {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
-
-
-
-
-
-
 }
